@@ -187,8 +187,6 @@ const versePlay = document.getElementById("versePlay");
 const wave = document.querySelector(".wave");
 const timeEl = document.querySelector(".time");
 const startReading = document.getElementById("startReading");
-const surahSection = document.getElementById("surahs");
-const heroCard = document.querySelector(".hero-card");
 const nav = document.getElementById("siteNav");
 const navToggle = document.getElementById("navToggle");
 const navToggleLabel = navToggle ? navToggle.querySelector(".nav-toggle-label") : null;
@@ -1296,20 +1294,10 @@ if (noteForm) {
   });
 }
 
-const scrollToSurahs = () => {
-  if (surahSection) {
-    surahSection.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-};
-
 if (startReading) {
   startReading.addEventListener("click", () => {
     openSurahWindow(SURAH_DATA[0]);
   });
-}
-
-if (exploreSurahs) {
-  exploreSurahs.addEventListener("click", scrollToSurahs);
 }
 
 const applyVerseToUi = (data) => {
