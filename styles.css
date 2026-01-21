@@ -280,9 +280,9 @@ h1 {
 }
 
 .hero-stats {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 30px;
 }
 
 .stat-value {
@@ -1221,13 +1221,7 @@ body.modal-open {
   }
 
   .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px 16px;
-  }
-
-  .hero-stats > div:last-child {
-    grid-column: span 2;
   }
 
   .hero-card {
