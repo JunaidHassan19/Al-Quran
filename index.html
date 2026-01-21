@@ -25,11 +25,25 @@
           <p class="brand-subtitle">Read. Listen. Reflect.</p>
         </div>
       </div>
-      <nav class="nav">
+      <nav class="nav" id="siteNav">
         <a href="#surahs">Surahs</a>
         <a href="#plans" class="nav-plans">Plans</a>
         <a href="#about">About</a>
       </nav>
+      <button
+        class="btn btn-ghost nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="siteNav"
+      >
+        <span class="nav-toggle-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
       <button class="btn btn-primary" id="startReading">Start Reading</button>
     </header>
 
@@ -42,10 +56,6 @@
             Explore every surah with transliteration, reflective notes, and recitations that
             keep pace with your daily rhythm.
           </p>
-          <div class="hero-actions">
-            <button class="btn btn-primary" id="exploreSurahs">Explore Surahs</button>
-            <button class="btn btn-ghost" id="listenToday">Listen to today</button>
-          </div>
           <div class="hero-stats">
             <div>
               <p class="stat-value">114</p>
@@ -54,10 +64,6 @@
             <div>
               <p class="stat-value">30</p>
               <p class="stat-label">Juz sections</p>
-            </div>
-            <div>
-              <p class="stat-value">Daily</p>
-              <p class="stat-label">Reflections</p>
             </div>
           </div>
         </div>

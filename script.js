@@ -186,12 +186,12 @@ const verseRef = document.getElementById("verseRef");
 const versePlay = document.getElementById("versePlay");
 const wave = document.querySelector(".wave");
 const timeEl = document.querySelector(".time");
-const listenToday = document.getElementById("listenToday");
-
 const startReading = document.getElementById("startReading");
-const exploreSurahs = document.getElementById("exploreSurahs");
 const surahSection = document.getElementById("surahs");
 const heroCard = document.querySelector(".hero-card");
+const nav = document.getElementById("siteNav");
+const navToggle = document.getElementById("navToggle");
+const navToggleLabel = navToggle ? navToggle.querySelector(".nav-toggle-label") : null;
 
 const state = {
   term: "",
@@ -205,6 +205,34 @@ const STORAGE_KEYS = {
   queue: "aq_queue",
   notes: "aq_notes",
   verse: "aq_verse_of_day"
+};
+
+const navMedia = window.matchMedia("(max-width: 720px)");
+
+const setNavState = (isOpen) => {
+  if (!nav || !navToggle) return;
+  nav.classList.toggle("is-open", isOpen);
+  navToggle.classList.toggle("is-open", isOpen);
+  navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  if (navToggleLabel) {
+    navToggleLabel.textContent = isOpen ? "Close" : "Menu";
+  }
+  nav.setAttribute("aria-hidden", isOpen ? "false" : "true");
+};
+
+const syncNavForViewport = () => {
+  if (!nav || !navToggle) return;
+  if (navMedia.matches) {
+    setNavState(false);
+    return;
+  }
+  nav.classList.remove("is-open");
+  navToggle.classList.remove("is-open");
+  navToggle.setAttribute("aria-expanded", "false");
+  nav.setAttribute("aria-hidden", "false");
+  if (navToggleLabel) {
+    navToggleLabel.textContent = "Menu";
+  }
 };
 
 const storageAvailable = (() => {
@@ -1126,6 +1154,29 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeDetail();
 });
 
+if (navToggle) {
+  navToggle.addEventListener("click", () => {
+    if (!nav) return;
+    setNavState(!nav.classList.contains("is-open"));
+  });
+}
+
+if (nav) {
+  nav.addEventListener("click", (event) => {
+    const link = event.target.closest("a");
+    if (!link || !navMedia.matches) return;
+    setNavState(false);
+  });
+}
+
+if (navMedia.addEventListener) {
+  navMedia.addEventListener("change", syncNavForViewport);
+} else if (navMedia.addListener) {
+  navMedia.addListener(syncNavForViewport);
+}
+
+syncNavForViewport();
+
 if (detailRead) {
   detailRead.addEventListener("click", () => {
     if (!activeSurah) return;
@@ -1435,15 +1486,6 @@ verseAudio.addEventListener("canplay", () => {
 
 if (versePlay) {
   versePlay.addEventListener("click", toggleVerse);
-}
-
-if (listenToday) {
-  listenToday.addEventListener("click", () => {
-    playVerse();
-    if (heroCard) {
-      heroCard.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  });
 }
 
 setVerseState(false);
