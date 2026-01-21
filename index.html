@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al Quran | Read, Listen, Reflect</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;600&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient">
+      <span class="orb orb-one"></span>
+      <span class="orb orb-two"></span>
+      <span class="orb orb-three"></span>
+    </div>
+
+    <header class="site-header">
+      <div class="brand">
+        <span class="mark">AQ</span>
+        <div>
+          <p class="brand-title">Al Quran</p>
+          <p class="brand-subtitle">Read. Listen. Reflect.</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#surahs">Surahs</a>
+        <a href="#plans" class="nav-plans">Plans</a>
+        <a href="#about">About</a>
+      </nav>
+      <button class="btn btn-primary" id="startReading">Start Reading</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Guided recitation for every day</p>
+          <h1>Al Quran, beautifully organized for mindful study.</h1>
+          <p class="lead">
+            Explore every surah with transliteration, reflective notes, and recitations that
+            keep pace with your daily rhythm.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="exploreSurahs">Explore Surahs</button>
+            <button class="btn btn-ghost" id="listenToday">Listen to today</button>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <p class="stat-value">114</p>
+              <p class="stat-label">Surahs</p>
+            </div>
+            <div>
+              <p class="stat-value">30</p>
+              <p class="stat-label">Juz sections</p>
+            </div>
+            <div>
+              <p class="stat-value">Daily</p>
+              <p class="stat-label">Reflections</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="card-header">
+            <span>Verse of the Day</span>
+            <span class="pill">Audio</span>
+          </div>
+          <div class="verse" id="verseText">
+            <p class="verse-ar" id="verseAr">Loading verse...</p>
+            <p class="verse-en" id="verseEn"></p>
+            <p class="verse-ur" id="verseUr"></p>
+          </div>
+          <p class="verse-ref" id="verseRef">Loading reference...</p>
+          <div class="player">
+            <button class="btn btn-icon" id="versePlay" type="button" aria-label="Play verse">
+              &#9654;
+            </button>
+            <div class="wave">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="time">0:00 / 1:08</div>
+          </div>
+          <div class="notes">
+            <p class="note-title">Reflection</p>
+            <p class="note-text">
+              Begin with gratitude and steadiness, anchoring the day with intention.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="surahs">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Browse and search</p>
+            <h2>Surah Library</h2>
+            <p class="section-lead">
+              Filter by name, meaning, or number to jump directly into your reading.
+            </p>
+          </div>
+          <div class="search">
+            <input
+              type="text"
+              id="surahSearch"
+              placeholder="Search by name, meaning, or number"
+              aria-label="Search surahs"
+              autocomplete="off"
+            />
+            <div class="filter-row" role="group" aria-label="Filter by revelation">
+              <button class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+              <button class="chip" data-filter="meccan" aria-pressed="false">Meccan</button>
+              <button class="chip" data-filter="medinan" aria-pressed="false">Medinan</button>
+            </div>
+            <div class="sort-row">
+              <label for="surahSort">Sort</label>
+              <select id="surahSort" aria-label="Sort surahs">
+                <option value="number">Number (ascending)</option>
+                <option value="name">Name (A to Z)</option>
+                <option value="length">Length (longest first)</option>
+              </select>
+            </div>
+            <span class="search-count" id="surahCount">Showing 0 of 114</span>
+          </div>
+        </div>
+        <div class="surah-grid" id="surahGrid"></div>
+        <div class="surah-actions" id="surahActions">
+          <button class="btn btn-ghost" id="seeAllSurahs" type="button">See all surahs</button>
+        </div>
+        <p class="no-results" id="noResults" hidden>
+          No surahs match your search. Try a different name, meaning, or number.
+        </p>
+      </section>
+
+      <section class="section plans" id="plans">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Personal plan</p>
+            <h2>Reading Plan Dashboard</h2>
+            <p class="section-lead">Shape your schedule and keep a gentle momentum.</p>
+          </div>
+        </div>
+        <div class="plan-grid">
+          <div class="plan-card reveal" id="planProgressCard">
+            <h3>Weekly Rhythm</h3>
+            <p class="plan-text">3 surahs, 2 reflections, and 1 memorization block.</p>
+            <div class="plan-checklist" id="planChecklist">
+              <label class="check-item">
+                <input type="checkbox" data-plan-task="surah-1" />
+                Surah session 1
+              </label>
+              <label class="check-item">
+                <input type="checkbox" data-plan-task="surah-2" />
+                Surah session 2
+              </label>
+              <label class="check-item">
+                <input type="checkbox" data-plan-task="surah-3" />
+                Surah session 3
+              </label>
+              <label class="check-item">
+                <input type="checkbox" data-plan-task="reflection-1" />
+                Reflection 1
+              </label>
+              <label class="check-item">
+                <input type="checkbox" data-plan-task="reflection-2" />
+                Reflection 2
+              </label>
+              <label class="check-item">
+                <input type="checkbox" data-plan-task="memorization" />
+                Memorization block
+              </label>
+            </div>
+            <div class="plan-progress">
+              <span class="progress-label">This week</span>
+              <span class="progress-value" id="progressValue">0%</span>
+            </div>
+            <div class="progress-bar">
+              <span id="progressBar"></span>
+            </div>
+            <button class="btn btn-ghost btn-small" id="resetPlan" type="button">
+              Reset week
+            </button>
+          </div>
+          <div class="plan-card reveal">
+            <h3>Listening Queue</h3>
+            <p class="plan-text">Recitations tailored to your preferred reciter.</p>
+            <form class="queue-form" id="queueForm">
+              <input
+                type="text"
+                id="queueInput"
+                placeholder="Add a surah to listen"
+                aria-label="Add a surah to listening queue"
+              />
+              <button class="btn btn-ghost btn-small" type="submit">Add</button>
+            </form>
+            <ul class="queue" id="queueList">
+              <li>Al-Kahf</li>
+              <li>Ya-Sin</li>
+              <li>Ar-Rahman</li>
+            </ul>
+          </div>
+          <div class="plan-card reveal">
+            <h3>Reflection Notes</h3>
+            <p class="plan-text">Capture insights and revisit themes over time.</p>
+            <form class="note-form" id="noteForm">
+              <input
+                type="text"
+                id="noteInput"
+                placeholder="Add a reflection note"
+                aria-label="Add a reflection note"
+              />
+              <button class="btn btn-ghost btn-small" type="submit">Add</button>
+            </form>
+            <div class="note-grid" id="noteGrid">
+              <button class="note-tag" type="button">Mercy</button>
+              <button class="note-tag" type="button">Guidance</button>
+              <button class="note-tag" type="button">Patience</button>
+              <button class="note-tag" type="button">Gratitude</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about" id="about">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">About this space</p>
+            <h2>Designed for clarity and calm</h2>
+          </div>
+        </div>
+        <div class="about-grid">
+          <div class="about-card reveal">
+            <h3>Audio-first design</h3>
+            <p>Every page prioritizes recitation with clear controls and pacing.</p>
+          </div>
+          <div class="about-card reveal">
+            <h3>Focus-friendly layout</h3>
+            <p>Soft contrasts and layered surfaces keep attention on the verses.</p>
+          </div>
+          <div class="about-card reveal">
+            <h3>Cross-device ready</h3>
+            <p>Read seamlessly across desktop, tablet, and mobile screens.</p>
+          </div>
+          <div class="about-card reveal">
+            <h3>Designed by Junaid Hassan</h3>
+            <p>
+              Built with care. GitHub:
+              <a href="https://github.com/JunaidHassan19" target="_blank" rel="noreferrer">
+                github.com/JunaidHassan19
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <p class="brand-title">Al Quran</p>
+        <p class="footer-text">A calm, modern space for reading and recitation.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#surahs">Surahs</a>
+        <a href="#learning">Learning</a>
+        <a href="#plans">Plans</a>
+      </div>
+      <p class="footer-note">Built with care for daily reflection.</p>
+    </footer>
+
+    <div class="surah-detail" id="surahDetail" aria-hidden="true">
+      <div class="surah-detail-card" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+        <button class="detail-close" id="detailClose" aria-label="Close">Close</button>
+        <div class="detail-header">
+          <div>
+            <p class="detail-number" id="detailNumber">Surah</p>
+            <h3 id="detailTitle">Surah name</h3>
+            <p class="detail-meaning" id="detailMeaning">Meaning</p>
+          </div>
+          <div class="detail-meta">
+            <span id="detailAyahs">Ayat</span>
+            <span id="detailType">Type</span>
+          </div>
+        </div>
+        <p class="detail-summary" id="detailSummary">
+          A short overview will appear here when a surah is selected.
+        </p>
+        <div class="detail-actions">
+          <button class="btn btn-primary" id="detailRead">Open in new window</button>
+          <button class="btn btn-ghost" id="detailQueue">Add to queue</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
