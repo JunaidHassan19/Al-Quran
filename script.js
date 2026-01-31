@@ -1,4 +1,4 @@
-const SURAH_DATA = [
+﻿const SURAH_DATA = [
   { number: 1, name: "Al-Fatiha", meaning: "The Opening", ayahs: 7, revelation: "Meccan" },
   { number: 2, name: "Al-Baqarah", meaning: "The Cow", ayahs: 286, revelation: "Medinan" },
   { number: 3, name: "Al Imran", meaning: "The Family of Imran", ayahs: 200, revelation: "Medinan" },
@@ -608,24 +608,25 @@ const buildSurahWindowHtml = (surah) => {
         border-top: 2px solid #93663a;
         border-bottom: 2px solid #93663a;
       }
-      .column-head {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+      .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+      .translation-btn {
+        border: 1px solid rgba(18, 32, 31, 0.2);
+        border-radius: 999px;
+        padding: 6px 14px;
+        background: linear-gradient(140deg, #1f6f6a, #37a295);
+        color: #fff;
+        font-size: 12px;
         text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 11px;
-        color: rgba(27, 31, 30, 0.7);
-        background: linear-gradient(90deg, #ead8b6, #f3e6cf, #ead8b6);
-        border-top: 1px solid rgba(18, 32, 31, 0.18);
-        border-bottom: 1px solid rgba(18, 32, 31, 0.18);
+        letter-spacing: 2px;
+        cursor: pointer;
       }
-      .column-head span {
-        padding: 10px 12px;
-        text-align: center;
-        border-right: 1px solid rgba(18, 32, 31, 0.14);
-      }
-      .column-head span:last-child {
-        border-right: none;
+      .translation-btn.is-active {
+        background: linear-gradient(140deg, #b06942, #d6a14e);
       }
       .close-btn {
         border: 1px solid rgba(18, 32, 31, 0.2);
@@ -699,74 +700,99 @@ const buildSurahWindowHtml = (surah) => {
         background: rgba(176, 105, 66, 0.1);
         color: rgba(120, 60, 40, 0.9);
       }
-      .ayah-list {
+                  .ayah-list {
         display: grid;
+        gap: 18px;
+        padding: 12px 14px 24px;
+        background: #fffdf7;
+        border: 2px solid #b7894f;
+        border-radius: 20px;
       }
-      .ayah {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        border-bottom: 1px solid rgba(18, 32, 31, 0.12);
+      .ayah-flow {
+        background: linear-gradient(180deg, #fff9f0, #f7ecd8);
+        border: 1px solid #d8c4a2;
+        border-radius: 16px;
+        padding: 18px 20px;
       }
-      .ayah:last-child {
-        border-bottom: none;
-      }
-      .ayah-cell {
-        padding: 16px 18px;
-        display: grid;
-        gap: 10px;
-      }
-      .ayah-cell + .ayah-cell {
-        border-left: 1px solid rgba(18, 32, 31, 0.12);
-      }
-      .ayah-cell.english {
-        background: rgba(255, 251, 244, 0.85);
-      }
-      .ayah-cell.roman {
-        background: rgba(250, 242, 227, 0.9);
-      }
-      .ayah-cell.arabic {
-        background: rgba(246, 238, 224, 0.95);
+      .basmala-line {
+        font-family: "Amiri", "Times New Roman", serif;
+        font-size: 34px;
+        line-height: 1.8;
+        direction: rtl;
         text-align: right;
-      }
-      .ayah-num {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: rgba(27, 31, 30, 0.5);
+        color: #12201f;
+        margin-bottom: 12px;
       }
       .ayah-ar {
         font-family: "Amiri", "Times New Roman", serif;
-        font-size: 26px;
-        line-height: 1.9;
+        font-size: 28px;
+        line-height: 2.1;
         direction: rtl;
         text-align: right;
         color: #12201f;
       }
+      .ayah-num-circle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 28px;
+        height: 28px;
+        padding: 0 6px;
+        margin: 0 6px;
+        border-radius: 999px;
+        border: 1px solid #b7894f;
+        color: #7a4c22;
+        font-size: 12px;
+        font-weight: 600;
+        background: #fff5e2;
+      }
+      .translations {
+        display: grid;
+        gap: 12px;
+      }
+      .translation-item {
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: #fffaf1;
+        border: 1px solid rgba(18, 32, 31, 0.12);
+        display: grid;
+        gap: 8px;
+      }
+      .translation-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba(27, 31, 30, 0.55);
+      }
       .ayah-en {
         font-size: 14px;
         line-height: 1.7;
-        color: rgba(27, 31, 30, 0.72);
+        color: rgba(27, 31, 30, 0.75);
       }
       .ayah-ur {
         font-size: 14px;
         line-height: 1.7;
-        color: rgba(27, 31, 30, 0.72);
+        color: rgba(27, 31, 30, 0.7);
         font-style: italic;
+      }
+      .translations-hidden .translations {
+        display: none;
       }
       @media (max-width: 640px) {
         .topbar { justify-content: center; }
         .hero { padding: 20px; }
-        .column-head { display: none; }
-        .ayah { grid-template-columns: 1fr; }
-        .ayah-cell + .ayah-cell {
-          border-left: none;
-          border-top: 1px solid rgba(18, 32, 31, 0.12);
-        }
-        .ayah-cell { padding: 14px 16px; }
+        .ayah-flow { padding: 16px; }
+        .basmala-line { font-size: 28px; }
+        .ayah-ar { font-size: 24px; }
+      }
+        .topbar { justify-content: center; }
+        .hero { padding: 20px; }
+        .ayah { padding: 14px 16px; }
+        .ayah-ar { font-size: 24px; }
       }
     </style>
   </head>
-  <body>
+  <body class="translations-hidden">
     <div class="ambient">
       <span class="one"></span>
       <span class="two"></span>
@@ -779,7 +805,10 @@ const buildSurahWindowHtml = (surah) => {
           <div class="label">Arabic + English + Indian Urdu (Roman)</div>
         </div>
       </div>
-      <button class="close-btn" id="closeBtn" type="button">Close</button>
+      <div class="action-buttons">
+        <button class="translation-btn" id="translationBtn" type="button">See Translation</button>
+        <button class="close-btn" id="closeBtn" type="button">Close</button>
+      </div>
     </header>
     <main>
       <div class="ornate-strip" aria-hidden="true"></div>
@@ -790,11 +819,6 @@ const buildSurahWindowHtml = (surah) => {
         <p class="summary" id="surahSummary">Summary</p>
       </section>
       <div class="status" id="status">Loading the surah text...</div>
-      <div class="column-head" aria-hidden="true">
-        <span>English</span>
-        <span>Indian Urdu (Roman)</span>
-        <span>Arabic</span>
-      </div>
       <section class="ayah-list" id="ayahList"></section>
       <div class="ornate-strip" aria-hidden="true"></div>
     </main>
@@ -807,11 +831,18 @@ const buildSurahWindowHtml = (surah) => {
       const metaEl = document.getElementById("surahMeta");
       const summaryEl = document.getElementById("surahSummary");
       const closeBtn = document.getElementById("closeBtn");
+      const translationBtn = document.getElementById("translationBtn");
 
       const setStatus = (message, isError = false) => {
         statusEl.textContent = message;
         statusEl.classList.toggle("is-error", isError);
         statusEl.classList.toggle("is-hidden", message.length === 0);
+      };
+      const setTranslationState = (show) => {
+        if (!translationBtn) return;
+        document.body.classList.toggle("translations-hidden", !show);
+        translationBtn.textContent = show ? "Hide Translation" : "See Translation";
+        translationBtn.classList.toggle("is-active", show);
       };
 
 
@@ -880,45 +911,65 @@ const buildSurahWindowHtml = (surah) => {
       };
 
 
-      const renderAyahs = (ayahs) => {
+                  const renderAyahs = (ayahs) => {
         ayahList.innerHTML = "";
-        ayahs.forEach((ayah) => {
-          const row = document.createElement("article");
-          row.className = "ayah";
 
-          const englishCell = document.createElement("div");
-          englishCell.className = "ayah-cell english";
-          const englishNumber = document.createElement("span");
-          englishNumber.className = "ayah-num";
-          englishNumber.textContent = "Ayah " + ayah.number;
+        const flow = document.createElement("div");
+        flow.className = "ayah-flow";
+        const basmalaLine = document.createElement("p");
+        basmalaLine.className = "basmala-line";
+        basmalaLine.textContent = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ الٓمٓ";
+        flow.appendChild(basmalaLine);
+        const arabic = document.createElement("p");
+        arabic.className = "ayah-ar";
+
+        const basmalaCore = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
+        ayahs.forEach((ayah, index) => {
+          let arabicText = ayah.ar || "";
+          if (index === 0 && arabicText.startsWith(basmalaCore)) {
+            arabicText = arabicText.slice(basmalaCore.length).trim();
+          }
+          if (!arabicText) {
+            return;
+          }
+          const textNode = document.createTextNode(arabicText + " ");
+          arabic.appendChild(textNode);
+          const num = document.createElement("span");
+          num.className = "ayah-num-circle";
+          num.textContent = ayah.number;
+          arabic.appendChild(num);
+          if (index < ayahs.length - 1) {
+            arabic.appendChild(document.createTextNode(" "));
+          }
+        });
+
+        flow.appendChild(arabic);
+        ayahList.appendChild(flow);
+
+        const translations = document.createElement("div");
+        translations.className = "translations";
+
+        ayahs.forEach((ayah) => {
+          const item = document.createElement("article");
+          item.className = "translation-item";
+
+          const label = document.createElement("span");
+          label.className = "translation-label";
+          label.textContent = "Ayah " + ayah.number;
+
           const english = document.createElement("p");
           english.className = "ayah-en";
           english.textContent = ayah.en;
-          englishCell.append(englishNumber, english);
 
-          const romanCell = document.createElement("div");
-          romanCell.className = "ayah-cell roman";
-          const romanNumber = document.createElement("span");
-          romanNumber.className = "ayah-num";
-          romanNumber.textContent = "Ayah " + ayah.number;
           const romanUrdu = document.createElement("p");
           romanUrdu.className = "ayah-ur";
           romanUrdu.textContent = ayah.ur;
-          romanCell.append(romanNumber, romanUrdu);
 
-          const arabicCell = document.createElement("div");
-          arabicCell.className = "ayah-cell arabic";
-          const arabicNumber = document.createElement("span");
-          arabicNumber.className = "ayah-num";
-          arabicNumber.textContent = "Ayah " + ayah.number;
-          const arabic = document.createElement("p");
-          arabic.className = "ayah-ar";
-          arabic.textContent = ayah.ar;
-          arabicCell.append(arabicNumber, arabic);
-
-          row.append(englishCell, romanCell, arabicCell);
-          ayahList.appendChild(row);
+          item.append(label, english, romanUrdu);
+          translations.appendChild(item);
         });
+
+        ayahList.appendChild(translations);
       };
 
       const loadSurah = async () => {
@@ -966,9 +1017,16 @@ const buildSurahWindowHtml = (surah) => {
         SURAH.revelation;
       summaryEl.textContent = SURAH.summary;
 
-      if (closeBtn) {
+            if (closeBtn) {
         closeBtn.addEventListener("click", () => {
           window.close();
+        });
+      }
+      if (translationBtn) {
+        setTranslationState(false);
+        translationBtn.addEventListener("click", () => {
+          const isHidden = document.body.classList.contains("translations-hidden");
+          setTranslationState(isHidden);
         });
       }
       loadSurah().catch(() => {
@@ -1480,3 +1538,19 @@ setVerseState(false);
 updateVerseTime();
 loadVerseOfDay();
 renderSurahs();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
